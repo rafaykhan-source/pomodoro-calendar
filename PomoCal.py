@@ -2,22 +2,22 @@ import os
 import time
 import datetime as dt
 import random
-from dotenv import load_dotenv
+import studyHistory as sh
 from gcsa.event import Event
 from gcsa.google_calendar import GoogleCalendar
-
-def configure():
-    load_dotenv()
-    return
 
 def ding(): 
     os.system("afplay " + "ding.mp3")
     return
 
 def initialize_calendar():
-    configure()
     global gc
-    gc = GoogleCalendar(calendar=os.getenv('cal'), credentials_path='credentials.json')
+    # fix api key and global variable
+    gc = GoogleCalendar(calendar=, credentials_path='credentials.json')
+    return
+
+def initialize_db():
+    sh.db_init()
     return
 
 def log_event(name, start, end, desc):
@@ -27,6 +27,7 @@ def log_event(name, start, end, desc):
     return
 
 def log_response_query(name, start, end, desc):
+    
     log_response = input("Would you like to log this interval on Google Calendar? (Yes or No)").lower()
     if 'yes' in log_response: log_event(name, start, end, desc)
     return
@@ -38,21 +39,20 @@ def report_block(study_sequence, seconds):
     minutes = minutes % 60
     study_sequence.append(f"{int(hours)}:{int(minutes)}:{seconds:.2f}")
     
-    
-    
 def traditional():
-    pomodoro_time = float(input("How long, in minutes, would you like each study block to be? "))
+    study_time = float(input("How long, in minutes, would you like each study block to be? "))
     rest_time = float(input("How long, in minutes, would you like your breaks to be? "))
 
     while True:
         desc = input("Please enter a description of your Study Block: ")
-        input(f"Press Enter/Return to start the your {pomodoro_time} minute study block.")
+        input(f"Press Enter/Return to start the your {study_time} minute study block.")
         start = dt.datetime.now()
         print(f"Your study block has begun! {start.strftime('%X')}")
-        time.sleep(pomodoro_time*60)
+        time.sleep(study_time*60)
         ding()
         end = dt.datetime.now()
         print(f"Your study block has ended! {end.strftime('%X')}")
+        sh.store_pomodoro()
         log_response_query("Pomodoro Session", start, end, desc)
         input(f"Press Enter/Return to start your {rest_time} minute break.")
         start = dt.datetime.now()
@@ -96,11 +96,11 @@ def personal():
     return
 
 # Program Start
-
 sequence_choice = input("""Would you like to develop a personalized study sequence, or follow a traditional study sequence? 
 Please respond either 'personal' or 'traditional': """).lower()
 
 initialize_calendar()
+initialize_db()
 
 traditional() if "trad" in sequence_choice else personal()
 
