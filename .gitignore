@@ -1,7 +1,5 @@
 .vscode/
 pomocalenv/
 .DS_Store
-pomocalcontainer/pomocal/__pycache__/__init__.cpython-310.pyc
-pomocalcontainer/pomocal/__pycache__/settings.cpython-310.pyc
-pomocalcontainer/pomocal/__pycache__/urls.cpython-310.pyc
-pomocalcontainer/pomocal/__pycache__/wsgi.cpython-310.pyc
+pomocalcontainer/pomocal/__pycache__/
+pomocalcontainer/pomodorocalendar/__pycache__/
