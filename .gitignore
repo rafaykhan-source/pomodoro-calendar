@@ -3,3 +3,4 @@ pomocalenv/
 .DS_Store
 pomocalcontainer/pomocal/__pycache__/
 pomocalcontainer/pomodorocalendar/__pycache__/
+pomocalcontainer/pomocal/settings.py
