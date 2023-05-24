@@ -9,14 +9,21 @@ class Session(models.Model):
     completed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.start_time
+        return str(self.start_time)
 
 
 class Task(models.Model):
-    session = models.ForeignKey(Session, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
     completed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
+
+
+class SessionTaskContainer(models.Model):
+    session = models.ForeignKey(Session, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.session.name + " " + self.task.name)
