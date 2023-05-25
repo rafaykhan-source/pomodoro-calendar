@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpRequest, HttpResponse
+from .models import Task
 
-# Create your views here.
-
-def index(request: HttpRequest):
-    return HttpResponse("Hello, world. You're at the pomodorocalendar index.")
+def index(request):
+    task_list = Task.objects.order_by("-id")[:5]
+    context = {"task_list": task_list}
+    return render(request, "pomodorocalendar/index.html", context)
