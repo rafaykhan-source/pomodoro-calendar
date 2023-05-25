@@ -21,6 +21,14 @@ class Task(models.Model):
         return str(self.name)
 
 
+class Note(models.Model):
+    title = models.CharField(max_length=25)
+    description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return str(self.title)
+
+
 class SessionTaskContainer(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
