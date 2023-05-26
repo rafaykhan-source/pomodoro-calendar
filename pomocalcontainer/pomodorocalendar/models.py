@@ -22,11 +22,11 @@ class Task(models.Model):
 
 
 class Note(models.Model):
-    title = models.CharField(max_length=25)
+    name = models.CharField(max_length=25)
     description = models.CharField(max_length=200)
 
     def __str__(self):
-        return str(self.title)
+        return str(self.name)
 
 
 class SessionTaskContainer(models.Model):
