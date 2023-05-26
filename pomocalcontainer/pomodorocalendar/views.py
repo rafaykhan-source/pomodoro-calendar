@@ -1,13 +1,11 @@
+from rest_framework import viewsets
 from .models import Task
 from .serializers import TaskSerializer
-from rest_framework import generics
 
 
-class TaskList(generics.ListCreateAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
-
-
-class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
+class TaskViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows tasks to be viewed or edited.
+    """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
