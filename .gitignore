@@ -5,4 +5,4 @@ pomocalcontainer/pomocal/__pycache__/
 pomocalcontainer/pomodorocalendar/__pycache__/
 pomocalcontainer/pomodorocalendar/migrations/__pycache__/
 pomocalcontainer/pomocal/settings.py
-
+pomocalreact/node_modules/*
