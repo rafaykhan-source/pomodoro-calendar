@@ -1,4 +1,6 @@
 // import { useState } from 'react'
+import NavBar from './components/NavBar'
+import NoteCardList from './components/NoteCardList'
 import './App.css'
 
 function App() {
@@ -6,6 +8,8 @@ function App() {
 
   return (
     <>
+      <NavBar />
+      <NoteCardList />
     </>
   )
 }
